@@ -1,7 +1,7 @@
 function App() {
   return (
     <>
-      <p>Hello Tailwind + React</p>
+      <p className="text-3xl">Hello Tailwind + React</p>
     </>
   );
 }
