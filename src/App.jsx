@@ -1,8 +1,14 @@
+import Navbar from "./components/Navbar";
+
 function App() {
   return (
-    <>
-      <p className="text-3xl">Hello Tailwind + React</p>
-    </>
+    <div className="h-full">
+      <div className="bg-black">
+        <div className="w-full lg:w-[75%] lg:mx-auto  font-mono">
+          <Navbar />
+        </div>
+      </div>
+    </div>
   );
 }
 
