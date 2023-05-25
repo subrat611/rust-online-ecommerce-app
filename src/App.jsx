@@ -1,5 +1,7 @@
 import { Route, Routes } from "react-router-dom";
+
 import Navbar from "./components/Navbar";
+import CreateProductForm from "./components/CreateProductForm";
 
 function App() {
   return (
@@ -7,7 +9,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Navbar />}>
           <Route index element={<p>main content</p>} />
-          <Route path="/create-product" element={<p>create product</p>} />
+          <Route path="/create-product" element={<CreateProductForm />} />
         </Route>
       </Routes>
     </div>
