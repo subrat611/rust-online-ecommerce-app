@@ -61,7 +61,7 @@ export default function CreateProductForm() {
       });
       e.target["productImage1"].value = null;
       e.target["productImage2"].value = null;
-      
+      e.target["productImage3"].value = null;
     } catch (err) {
       if (err.code === "ERR_NETWORK") {
         console.log("Network Error");
@@ -104,6 +104,15 @@ export default function CreateProductForm() {
           <label htmlFor={`productImage`}>Product images 2</label>
           <input
             id="productImage2"
+            type="file"
+            onChange={handleImageChange}
+            className="appearance-none border border-gray-300 shadow-sm placeholder-gray-400 rounded-md my-2 text-md px-2 py-2 focus:border-2 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+          />
+        </div>
+        <div className="flex flex-col m-3">
+          <label htmlFor={`productImage`}>Product images 3</label>
+          <input
+            id="productImage3"
             type="file"
             onChange={handleImageChange}
             className="appearance-none border border-gray-300 shadow-sm placeholder-gray-400 rounded-md my-2 text-md px-2 py-2 focus:border-2 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
