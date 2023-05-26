@@ -40,7 +40,7 @@ export const productFormInput = [
   },
   {
     name: "rating",
-    type: "text",
+    type: "number",
   },
   {
     name: "stock",
