@@ -11,7 +11,6 @@ export default function CreateProductForm() {
     stock: "",
     category: "",
   });
-  const [selectedImages, setSelectedImages] = useState([]);
 
   const handleProductInfo = (e) => {
     const field = e.target.name;
@@ -20,24 +19,21 @@ export default function CreateProductForm() {
 
   const handleImageChange = (e) => {
     const files = e.target.files;
-    const newSlectedImages = [...selectedImages];
 
     for (let i = 0; i < files.length; i++) {
       const reader = new FileReader();
 
       reader.onloadend = () => {
         const base64String = reader.result;
-        newSlectedImages.push(base64String);
+
+        setProductInfo((prev) => ({
+          ...prev,
+          [e.target.id]: base64String,
+        }));
       };
 
       if (files[i]) reader.readAsDataURL(files[i]);
     }
-
-    setSelectedImages(newSlectedImages);
-    // setProductInfo((prev) => ({
-    //   ...prev,
-    //   images: newSlectedImages,
-    // }));
   };
 
   const handleProductFormSubmit = async (e) => {
@@ -46,15 +42,26 @@ export default function CreateProductForm() {
     try {
       const response = await axios.post(
         `${BASE_URL}/api/product`,
-        {
-          productDetails: productInfo,
-          productImages: selectedImages,
-        },
+        productInfo,
         {
           headers: AXIOS_HEADERS,
         }
       );
+
       console.log(response);
+
+      //reset the field
+      setProductInfo({
+        title: "",
+        description: "",
+        price: "",
+        rating: "",
+        stock: "",
+        category: "",
+      });
+      e.target["productImage1"].value = null;
+      e.target["productImage2"].value = null;
+      
     } catch (err) {
       if (err.code === "ERR_NETWORK") {
         console.log("Network Error");
@@ -85,11 +92,19 @@ export default function CreateProductForm() {
           </div>
         ))}
         <div className="flex flex-col m-3">
-          <label htmlFor={`productImage`}>Product images</label>
+          <label htmlFor={`productImage`}>Product images 1</label>
           <input
-            id="productImage"
+            id="productImage1"
             type="file"
-            multiple
+            onChange={handleImageChange}
+            className="appearance-none border border-gray-300 shadow-sm placeholder-gray-400 rounded-md my-2 text-md px-2 py-2 focus:border-2 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+          />
+        </div>
+        <div className="flex flex-col m-3">
+          <label htmlFor={`productImage`}>Product images 2</label>
+          <input
+            id="productImage2"
+            type="file"
             onChange={handleImageChange}
             className="appearance-none border border-gray-300 shadow-sm placeholder-gray-400 rounded-md my-2 text-md px-2 py-2 focus:border-2 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
           />
