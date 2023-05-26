@@ -41,7 +41,7 @@ export default function CreateProductForm() {
 
     try {
       const response = await axios.post(
-        `${BASE_URL}/api/product`,
+        `${BASE_URL}/api/products`,
         productInfo,
         {
           headers: AXIOS_HEADERS,
